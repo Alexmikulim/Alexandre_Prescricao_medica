@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/recursos/template/template.xhtml">
+
+	<ui:define name="tituloPrincipal">Medicamentos Cadastrados</ui:define>
+	<ui:define name="tituloSecundario"></ui:define>
+
+	<ui:define name="botoesAcao">
+		<p:button value="Voltar" href="Medicamento.jsf" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+		<ui:define name="#{medicamentoBean}" />
+		<p:dataTable value="#{medicamentoBean.listarMedicamentos()}" var="med">
+
+			<p:column headerText="Nome">
+				<h:outputText value="#{med.nome}" />
+			</p:column>
+
+			<p:column headerText="Concentração: ">
+				<h:outputText value="#{med.concentracao}" />
+			</p:column>
+
+			<p:column headerText="Laboratório">
+				<h:outputText value="#{med.laboratorio}" />
+			</p:column>
+
+			<p:column headerText="Tarja: ">
+				<h:outputText value="#{med.tarja}" />
+			</p:column>
+
+			<p:column headerText="Ação">
+				<p:commandButton value="Excluir"
+					action="#{medicamentoBean.excluirMedicamento(med)}" update="@form" />
+			</p:column>
+
+		</p:dataTable>
+
+	</ui:define>
+</ui:composition>
+</html>

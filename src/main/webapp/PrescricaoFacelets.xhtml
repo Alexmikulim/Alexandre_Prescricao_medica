@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/recursos/template/template.xhtml">
+
+	<ui:define name="tituloPrincipal">Prescrições Cadastrados</ui:define>
+	<ui:define name="tituloSecundario"></ui:define>
+
+	<ui:define name="botoesAcao">
+		<p:button value="Voltar" href="Prescricao.jsf" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+		<ui:define name="#{prescricaoBean}" />
+		<p:dataTable value="#{prescricaoBean.listarPrescricao()}" var="pres">
+
+			<p:column headerText="Paciente: ">
+				<h:outputText value="#{pres.paciente.nome}" />
+			</p:column>
+
+			<p:column headerText="Medicamento: ">
+				<h:outputText value="#{pres.medicamento.nome}" />
+			</p:column>
+
+			<p:column headerText="Data de Inicio: ">
+				<h:outputText value="#{pres.dataInicio}" />
+			</p:column>
+
+			<p:column headerText="Data de Termino: ">
+				<h:outputText value="#{pres.dataFinal}" />
+			</p:column>
+
+			<p:column headerText="Frequencia: ">
+				<h:outputText value="#{pres.frequencia}" />
+			</p:column>
+
+			<p:column headerText="Ação">
+				<p:commandButton value="Excluir"
+					action="#{prescricaoBean.excluirPrescricao()}" update="@form" />
+			</p:column>
+
+
+
+		</p:dataTable>
+	</ui:define>
+
+</ui:composition>
+</html>
